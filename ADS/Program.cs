@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
+
 namespace ADS
 {
 
@@ -42,26 +43,49 @@ namespace ADS
         // Inserts a node into the tree and maintains it's balance
         public void insert(ADSNode parent, int value)
         {
+            ADSNode n = new ADSNode();
+
+            if(root == null)
+            {
+                root = new ADSNode();
+
+            }
+            else
+            {
+
+            }
             if(value < parent.key)
             {
-                if (parent.right == null)
+                if (parent.left == null)
                 {
                     //create new node
+                    n.key = value;
+                    parent.left = n;
+
                 }
                 else
                 {
+                    insert(parent.right, value);
+
+                    parent.height = Math.Max(parent.left == null ? 0 : parent.left.height,
+                                             parent.right == null ? 0 : parent.right.height) + 1;
 
                 }
             }
             else if(value > parent.key)
             {
-                if(parent.left == null)
+                if(parent.right == null)
                 {
                     //create new node
+                    n.key = value;
+                    parent.right = n;
                 }
                 else
                 {
+                    insert(parent.right, value);
 
+                    parent.height = Math.Max(parent.right == null ? 0 : parent.right.height,
+                                             parent.left == null ? 0 : parent.left.height) + 1;
                 }
             }
             
